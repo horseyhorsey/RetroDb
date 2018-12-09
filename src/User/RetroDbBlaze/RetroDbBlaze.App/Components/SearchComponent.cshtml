@@ -1,0 +1,24 @@
+﻿@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper UriHelper
+
+<div style="display:flex">
+
+    <input bind="@SearchString" type="text"
+           class="w3-input w3-show-inline-block"
+           style="white-space:nowrap;overflow:hidden;float:left"
+           placeholder="Game Search.." />
+
+    <a onclick="@(() => Navigate())" class="w3-green w3-button"
+        style="white-space:nowrap;overflow:hidden;float:left">
+        <i class="oi oi-magnifying-glass"></i>
+    </a>
+</div>
+
+@functions
+{
+    string SearchString { get; set; }
+
+    public void Navigate()
+    {
+        UriHelper.NavigateTo($"/search/{@SearchString}/0");
+    }
+}

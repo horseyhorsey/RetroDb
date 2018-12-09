@@ -1,0 +1,101 @@
+﻿@page "/Favorites"
+@using RetroDb.Data
+@inject HttpClient Http
+
+@if (games == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    @if (games?.Count > 0)
+    {
+        <div class="w3-container">
+            @*@for (int i = 1; i < _pagingInfo.PageCount; i++)
+                {
+                    <input type="button" class="w3-button" value="@i" onclick="@(() => GoToPage(i))" />
+
+                }*@
+
+            <div class="row">
+                <button class="w3-button" onclick="@(async () => await NavigatePage("left"))">&lt;</button>
+                <input type="number" min="1" max="@_pagingInfo.PageCount" bind=@_pagingInfo.PageNo />
+                <button class="w3-button" onclick="@(async () => await NavigatePage("right"))">&gt;</button>
+            </div>
+
+        </div>
+
+        <div>
+            @foreach (var game in games)
+            {
+                <div class="w3-half">
+                    <GameComponent game="game" />
+                </div>
+
+            }
+        </div>
+    }
+}
+
+@functions
+{
+    List<Game> games { get; set; }
+
+    PagingInfo _pagingInfo { get; set; }
+
+    protected override async Task OnInitAsync()
+    {
+        //UriHelper.OnLocationChanged += OnLocationChanges;
+        games = new List<Game>();
+        //var query = BuildQuery(term, page, _pageSize);
+        await GetFavorites();
+    }
+
+    public async Task NavigatePage(string direction)
+    {
+        if (direction == "left")
+        {
+            if (_pagingInfo.PageNo > 1)
+            {
+                _pagingInfo.PageNo -= 1;
+                await GetFavorites(_pagingInfo.PageNo);
+                StateHasChanged();
+            }
+        }
+        else
+        {
+            if (_pagingInfo.PageNo >= _pagingInfo.PageCount - 1)
+            {
+                _pagingInfo.PageNo = _pagingInfo.PageCount - 1;
+            }
+
+            else if (_pagingInfo.PageNo < _pagingInfo.PageCount - 1)
+            {
+                _pagingInfo.PageNo += 1;
+                await GetFavorites(_pagingInfo.PageNo);
+                StateHasChanged();
+            }
+        }
+
+    }
+
+    protected async Task GetFavorites(int page = 1, int pagesize = 10)
+    {
+        games?.Clear();
+        var query = $@"api/Games/Favorites?page={page}&pageSize={pagesize}";
+        try
+        {
+            var result = await Http.GetJsonAsync<PagedResult<Game>>(query);
+            games = result.Data;
+            _pagingInfo = result.Paging;
+        }
+        catch (Exception ex)
+        {
+            throw;
+        }
+
+        if (games == null)
+            games = new List<Game>();
+    }
+
+}

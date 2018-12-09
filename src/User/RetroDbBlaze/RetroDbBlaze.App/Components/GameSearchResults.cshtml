@@ -1,0 +1,23 @@
+﻿<div>
+    @if (SearchResult?.Data != null)
+    {
+        <!--Game results-->
+    <ul class="w3-ul">
+        @foreach (var game in SearchResult.Data)
+        {
+            <li>
+                <GameSearchResult Game="@game"/>            
+            </li>
+        }
+    </ul>
+    }
+</div>
+
+
+
+@functions
+{
+[Parameter]
+PagedResult<Game> SearchResult { get; set; }
+
+}

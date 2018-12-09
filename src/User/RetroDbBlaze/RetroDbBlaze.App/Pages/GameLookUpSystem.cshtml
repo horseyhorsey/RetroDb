@@ -1,0 +1,98 @@
+﻿@page "/system/{SystemId:int}/allgames"
+@using RetroDb.Data.Model
+@inject HttpClient Http
+
+@if (Games == null)
+{
+    <p><em>Loading system...</em></p>
+}
+else
+{
+    //-----genres Filter------
+    <div class="w3-row w3-margin">
+        <h5>All Games</h5>
+        <select class="w3-rest" onchange="@GenreChanged">
+            @foreach (var genre in genres)
+            {
+                <option value="@genre">@genre</option>
+            }
+        </select>
+    </div>
+
+
+    @if (FilteredGames?.Count > 0)
+    {
+    <div class="w3-responsive w3-margin">
+
+
+        <ul class="w3-ul w3-animate-right">
+            @foreach (var game in FilteredGames)
+            {
+            <li class="w3-bar">
+                <a href='/game/@(game.Id)'>
+                    <div>                        
+                        <div class="w3-bar-item w3-small w3-half">
+                            <div class="w3-button w3-green">RL</div>
+                            <span class="w3-large">@game.ShortDescription - @game.Genre</span><br>
+                            <span>@game.Year - </span>
+                            <span>@game.Manufacturer</span>
+                        </div>
+                    </div>
+                </a>
+            </li>                
+            }
+        </ul>
+
+
+
+        @*<table class="w3-table w3-striped w3-border w3-small w3-yellow">
+
+            <thead>
+                <tr>
+                    <th>Game</th>
+                    <th>Genre</th>
+                    <th>Year</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var game in FilteredGames)
+                {
+                    <tr>
+                        <td>@game.ShortDescription</td>
+                        <td>@game.Genre</td>
+                        <td>@game.Year</td>
+                    </tr>
+                }
+            </tbody>
+        </table>*@
+    </div>
+    }
+
+}
+
+@functions
+{
+    IReadOnlyList<GameLookup> Games { get; set; }
+    IReadOnlyList<GameLookup> FilteredGames { get; set; }
+
+    [Parameter]
+    int SystemId { get; set; }
+
+    IEnumerable<string> genres { get; set; }
+
+    protected override async Task OnInitAsync()
+    {
+        var _games = await Http.GetJsonAsync<IEnumerable<GameLookup>>($"api/games/lookup/{SystemId}");
+        Games = _games?.ToList();
+        FilteredGames = Games;
+        genres = Games?.Select(x => x.Genre)?.OrderBy(x => x).Distinct();
+    }
+
+    void GenreChanged(UIChangeEventArgs uie)
+    {
+        var selectedGenre = uie.Value.ToString();
+        FilteredGames = Games.Where(x => x.Genre == selectedGenre).ToList();
+    }
+
+}

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu>  
+  <game name="Amstrad CPC" enabled="1" />
+  <game name="Commodore Amiga" enabled="1" />
+  <game name="Commodore 64" enabled="1" />  
+</menu>

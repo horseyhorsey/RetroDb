@@ -1,0 +1,32 @@
+﻿@inject ApplicationState appState
+@page  "/"
+
+<div id="retrodb-welcome" class="w3-center">
+    <p class="w3-bungee w3-jumbo w3-center w3-margin-top w3-margin-bottom">Retro.Db <i class="fa-1x fas fa-gamepad"></i></p>
+    <hr/>
+</div>
+
+<div class="retrodb-stat-table w3-half w3-kalam w3-50%">
+    <div class="w3-container">
+        <header class="w3-container">
+            <h1 class="w3-bangers">Recently Played</h1>
+        </header>
+        <StatsTableComponent Games="@appState.RetroDbStats.RecentPlayed" />
+    </div>
+</div>
+
+<div class="retrodb-stat-table w3-half w3-kalam w3-50%">
+    <div class="w3-container">
+        <header class="w3-container">
+            <h1 class="w3-bangers">Most Played</h1>
+        </header>
+        <StatsTableComponent Games="@appState.RetroDbStats.MostPlayed" />
+    </div>
+</div>
+
+@functions{
+    protected override void OnInit()
+    {
+        appState.OnStateChanged += StateHasChanged;
+    }
+}

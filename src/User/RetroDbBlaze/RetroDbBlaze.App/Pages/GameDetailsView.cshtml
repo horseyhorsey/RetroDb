@@ -1,0 +1,116 @@
+﻿@page "/game/{id:int}"
+@using RetroDbBlaze.App.Services
+@inject ApplicationState appState;
+@using RetroDb.Data;
+@inject HttpClient Http;
+
+@if (_game != null)
+{
+
+<div class="w3-center w3-main" id="game-details">
+
+    <div class="w3-container w3-margin-top">
+
+        <div class="w3-bar">
+
+            <img class="w3-round w3-image w3-container"
+                 width="250" height="100"
+                 src="/hsFiles/@(_game.System.Name)/Images/Wheel/@(_game.FileName).png" alt=" " />
+
+            <a href="/system/@_game.SystemId">
+                <img class="w3-round w3-image w3-container"
+                     width="170" height="50"
+                     src="/hsFiles/Main Menu/Images/Wheel/@(_game.System?.Name).png" alt=" " />
+            </a>
+        </div>
+
+        <h4>@_game.ShortDescription</h4>
+
+        <h5>TimePlayed:</h5>
+        <p>@_game.TimePlayed</p>
+
+        <div class="w3-row">
+            <button class="w3-button w3-green" onclick="@(() => appState.LaunchGame(_game))">Launch</button>
+            @if (_game.Favourite)
+            {
+                <i class="oi oi-star"></i>
+            }
+
+        </div>
+
+        <div class="w3-row">
+            <p>Id:          @_game.Id</p>
+            <p>Rom/File:    @_game.FileName</p>
+            <p>Short Desc:  @_game.ShortDescription</p>
+            <p>Year:        @_game.Year</p>
+            <hr />
+            <p>Enabled:     @_game.Enabled</p>
+            <p>Favorite:    @_game.Favourite</p>
+            <p>User Rating: @_game.UserRating</p>
+            <p>Region:      @_game.Region</p>
+
+        </div>
+
+        <div class="w3-row-padding">
+            <div class="w3-container w3-third">
+                <img class="w3-round w3-image"
+                     width="250" height="100"
+                     onclick="@(() => OnImageSelected(1))"
+                     src="/hsFiles/@(_game.System.Name)/Images/Artwork1/@(_game.FileName).png" alt=" " />
+            </div>
+            <div class="w3-container w3-third">
+                <img class="w3-round w3-image"
+                     width="250" height="100"
+                     onclick="@(() => OnImageSelected(2))"
+                     src="/hsFiles/@(_game.System.Name)/Images/Artwork2/@(_game.FileName).png" alt=" " />
+            </div>
+            <div class="w3-container w3-third">
+                <img class="w3-round w3-image"
+                     width="250" height="100"
+                     onclick="@(() => OnImageSelected(3))"
+                     src="/hsFiles/@(_game.System.Name)/Images/Artwork3/@(_game.FileName).png" alt=" " />
+            </div>
+            <div class="w3-container w3-third">
+                <img class="w3-round w3-image"
+                     width="250" height="100"
+                     onclick="@(() => OnImageSelected(4))"
+                     src="/hsFiles/@(_game.System.Name)/Images/Artwork4/@(_game.FileName).png" alt=" " />
+            </div>
+        </div>
+
+        <!-- IMAGE MODAL-->
+        <div id="image-model" class="w3-modal @(IsImageModalVisible ? "w3-block" : "w3-hide")"
+             onclick="@(() => IsImageModalVisible = false)">
+            <img class="w3-modal-content w3-image" id="img01" src="@SelectedImage" style="width:100%;max-width:400px">
+        </div>
+    </div>
+</div>
+
+
+}
+
+@functions
+{
+    [Parameter]
+    int id { get; set; }
+
+    public Game _game { get; set; }
+
+    bool IsImageModalVisible { get; set; }
+
+    string SelectedImage { get; set; } = string.Empty;
+
+    private void OnImageSelected(int imgIndex)
+    {
+        SelectedImage = $"/hsFiles/{_game.System.Name}/Images/Artwork{imgIndex}/{_game.FileName}.png";        
+        IsImageModalVisible = true;
+    }
+
+    protected override async Task OnInitAsync()
+    {
+        var url = $"api/games/{id}";
+        _game = await Http.GetJsonAsync<Game>(url);
+        var sysUrl = "api/systems/" + _game.SystemId;
+        _game.System = await Http.GetJsonAsync<GameSystem>(sysUrl);
+    }
+}

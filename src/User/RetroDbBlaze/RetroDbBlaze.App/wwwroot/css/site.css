@@ -1,0 +1,205 @@
+.w3-anton {
+  font-family: "Anton", sans-serif;
+}
+
+.w3-lobster {
+  font-family: "Lobster", cursive;
+}
+
+.w3-bungee {
+  font-family: "Bungee", cursive;
+}
+
+.w3-marker {
+  font-family: "Permanent Marker", cursive;
+}
+
+.w3-kalam {
+  font-family: "Kalam", cursive;
+}
+
+.w3-bungee {
+  font-family: "Bungee", cursive;
+}
+
+.w3-bangers {
+  font-family: "Bangers", cursive;
+}
+
+.w3-sigmar {
+  font-family: "Sigmar One", cursive;
+}
+
+/*font-family: 'Anton', sans-serif;
+    font-family: 'Lobster', cursive;
+    font-family: 'Bungee', cursive;
+    font-family: 'Permanent Marker', cursive;
+    font-family: 'Kalam', cursive;
+    font-family: 'Bangers', cursive;
+    font-family: 'Sigmar One', cursive;*/
+/*Colors*/
+/*BLUE*/
+/*$color1: #4A87BF;
+$color2: #325A7F;
+$color3: #63B4FF;
+$color4: #192D40;
+$color5: #59A2E5;*/
+html {
+  font-family: "Sigmar One", cursive;
+  height: 100%;
+  background: #202020;
+}
+
+body {
+  font-family: "Josefin Sans", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #86C232;
+}
+
+p {
+  font-family: "Bungee", cursive;
+  color: #1d1d1d;
+}
+
+#retrodb-welcome p {
+  color: #86C232;
+}
+
+.busy {
+  position: absolute;
+  width: 100%;
+}
+.busy > .cover {
+  width: 100%;
+  background: rgba(150, 150, 150, 0.5);
+  position: absolute;
+  height: 100%;
+  z-index: 1;
+}
+
+.retro-header {
+  background: #6B6E70;
+  border: 5px groove yellow;
+  width: 100%;
+}
+
+.retro-header h1 {
+  color: yellow;
+}
+
+.retro-menu-btn {
+  right: 0px;
+}
+
+.retrodb-tinytopmargin {
+  margin-top: 12px;
+}
+
+.retrodb-stat-table header {
+  background: #6B6E70;
+}
+
+/*Colors*/
+/*BLUE*/
+/*$color1: #4A87BF;
+$color2: #325A7F;
+$color3: #63B4FF;
+$color4: #192D40;
+$color5: #59A2E5;*/
+/*nav bar links*/
+.active {
+  background: #222629;
+  color: #86C232;
+}
+
+#retrodb-navbar {
+  background: #6B6E70;
+  color: #474B4F;
+}
+
+i:hover {
+  color: #86C232;
+}
+
+#retrodb-nav-link .i :hover {
+  color: pink;
+}
+
+#icon-home {
+  color: #61892F;
+}
+
+#icon-search {
+  color: whitesmoke;
+}
+
+#icon-systems {
+  color: #86C232;
+}
+
+#icon-faves {
+  color: gold;
+}
+
+/*Colors*/
+/*BLUE*/
+/*$color1: #4A87BF;
+$color2: #325A7F;
+$color3: #63B4FF;
+$color4: #192D40;
+$color5: #59A2E5;*/
+#game-search-container {
+  margin: 0;
+}
+
+#game-search {
+  background: linear-gradient(235deg, #6B6E70 0%, #6B6E70 100%);
+  color: black;
+  font-size: 14px;
+  font-family: "Bungee", cursive;
+}
+
+#game-search-results {
+  background: #202020;
+}
+
+#page-results-container {
+  background: linear-gradient(45deg, #6B6E70 8%, #222629 100%);
+  border-radius: 10px;
+  font-weight: bolder;
+  font-size: 24px;
+}
+
+#page-results-container p {
+  color: #222629;
+}
+
+#game-search-result-item {
+  /*background: $color4;*/
+  background: linear-gradient(35deg, #6B6E70 8%, #222629 100%);
+  color: #e8fdfe;
+  font-family: "Anton", sans-serif;
+}
+
+#game-details {
+  width: 100%;
+  float: right;
+}
+
+#game-details p {
+  color: #86C232;
+}
+
+#retrodb-systems-container-item {
+  background: linear-gradient(90deg, #6B6E70 0%, #6B6E70 70%, #474B4F 100%);
+  box-shadow: #61892F 2px 2px;
+}
+
+#retrodb-systems-container p {
+  color: #86C232;
+  font-size: 16px;
+}
+
+/*# sourceMappingURL=site.css.map */

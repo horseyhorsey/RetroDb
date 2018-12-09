@@ -1,0 +1,25 @@
+﻿@page "/Search"
+@inject ApplicationState appState;
+
+<GameSearchComponent SearchGames="appState.SearchGamesAsync" GameSearchOption="appState.GameSearchOption" />
+
+<div id="game-search-container">
+
+    <div id="game-search-results">
+        <BusyComponent IsBusy="appState.IsSearchRunning">
+
+            <PageResultsComponent SearchGames="appState.SearchGamesAsync"
+                                  SearchResult="appState.GameSearchResults"
+                                  GameSearchOption="appState.GameSearchOption" />
+            <GameSearchResults SearchResult="appState.GameSearchResults" />
+        </BusyComponent>
+    </div>
+</div>
+
+@functions{
+
+    protected override void OnInit()
+    {
+        appState.OnStateChanged += StateHasChanged;
+    }
+}

@@ -1,0 +1,29 @@
+﻿
+@if (Game != null)
+{
+    <h1> In Game</h1>
+
+    <div class="w3-row">
+        <p>Id:          @Game.Id</p>
+        <p>Rom/File:    @Game.FileName</p>
+        <p>Short Desc:  @Game.ShortDescription</p>
+        <p>Year:        @Game.Year</p>
+        <hr />
+        <p>Enabled:     @Game.Enabled</p>
+        <p>Favorite:    @Game.Favourite</p>
+        <p>User Rating: @Game.UserRating</p>
+        <p>Region:      @Game.Region</p>
+
+        <hr />
+        <p>TimePlayed:  @Game.TimePlayed</p>
+
+        <a href="/system/@Game.SystemId">@Game.System.Name</a>
+        <hr />
+    </div>
+}
+
+@functions
+{
+    [Parameter]
+    Game Game { get; set; }
+}

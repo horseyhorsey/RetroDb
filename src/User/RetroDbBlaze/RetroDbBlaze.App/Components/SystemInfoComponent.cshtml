@@ -1,0 +1,26 @@
+﻿@using RetroDb.Data.Model
+
+<div class="w3-row w3-rest w3-margin-top">
+    <div class="w3-bar w3-light-gray">
+        <div class="w3-bar-item w3-button w3-indigo">Games: @GameSystemInfo?.GameCount</div>
+        <NavLink href="@AllGamesLink">
+            <button class="w3-button w3-red"><i class="oi oi-eye"></i>  ALL GAMES</button>
+        </NavLink>
+        <div class="w3-bar-item w3-button w3-right"><i class="oi oi-clock"></i>   Time Played: @GameSystemInfo?.Timeplayed</div>
+    </div>
+</div>
+
+
+@functions{
+
+    [Parameter]
+    GameSystemInfo GameSystemInfo { get; set; }
+
+    string AllGamesLink { get; set; }
+
+    protected override void OnInit()
+    {
+        var sysId = GameSystemInfo.GameSystem.Id;
+        AllGamesLink = $@"/system/{sysId}/allgames";
+    }
+}

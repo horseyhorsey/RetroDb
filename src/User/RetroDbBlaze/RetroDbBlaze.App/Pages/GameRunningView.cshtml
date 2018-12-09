@@ -1,0 +1,18 @@
+﻿@page "/game/running"
+@inject ApplicationState appState
+
+
+@if (appState.IsRocketLaunchRunning && appState.RunningGame != null)
+{
+    <GameRunningCtrlComponent NavigatePause="appState.NavigatePause" PauseGame="appState.PauseGame" QuitGame="appState.QuitGame"/>
+
+    <GameRunningComponent Game="@appState.RunningGame" />
+}
+
+@functions{
+
+    protected override void OnInit()
+    {
+        appState.OnStateChanged += StateHasChanged;
+    }
+}

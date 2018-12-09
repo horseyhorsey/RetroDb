@@ -1,0 +1,39 @@
+﻿@if (Games?.Count() > 0)
+{
+    <table class="w3-table-all w3-card-4 w3-medium">
+        <thead>
+            <tr>
+                <th>Sys</th>
+                <th>Game</th>
+                <th><i class="fas fa-clock"></i></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var game in Games)
+            {            
+                <tr>
+                    <td><a href="/game/@game.Id">@game.ShortDescription</a></td>
+                    <td>@game.LastPlayed</td>
+                    <td class="w3-bar-item">
+                        <div class="w3-bar">
+                            <img class="w3-image w3-bar-item" style="height:32px" src="./RlFiles/Icons/@($"{game.System?.Name}.png")" />
+                            <p class="w3-bar-item">@game.System.Name</p>
+                        </div>
+                    </td>
+                </tr>            
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Games loading.....</p>
+}
+
+
+@functions
+{
+[Parameter]
+Game[] Games { get; set; }
+}

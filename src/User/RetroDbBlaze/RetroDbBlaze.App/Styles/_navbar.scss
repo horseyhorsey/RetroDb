@@ -1,0 +1,37 @@
+﻿@import "_variables.scss";
+
+/*nav bar links*/
+.active {
+    background: $color3;
+    color: $color2;
+}
+
+#retrodb-navbar {
+    background: $color5;
+    color: $color4;    
+}
+
+i:hover{
+   color:$color2; 
+}
+
+#retrodb-nav-link .i :hover{
+    color:pink;
+}
+
+#icon-home {
+    color: $color1;
+}
+
+#icon-search{
+    color:whitesmoke;
+}
+
+#icon-systems 
+{
+    color:$color2;
+}
+
+#icon-faves {
+    color:gold;
+}

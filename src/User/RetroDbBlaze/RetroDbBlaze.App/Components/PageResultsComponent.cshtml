@@ -1,0 +1,92 @@
+﻿@if (SearchResult != null)
+{    
+<div id="page-results-container" class="w3-margin w3-container">
+
+    <div>
+        <div class="w3-cell-row">
+
+            <div class="w3-cell w3-mobile">
+                <p class="w3-lobster">Results: @SearchResult?.Paging.TotalRecordCount</p>
+            </div>
+
+            <div class="w3-margin-top">
+                <button class="w3-button w3-green w3-cell w3-left w3-margin-right" onclick="@(async () => await NavigatePage("left"))">&lt;</button>
+                <input style="width:45px" class="w3-cell w3-input w3-left w3-margin-right" type="tel" min="1" onkeyup="@OnKeyUp" max="@SearchResult?.Paging?.PageCount" bind="@GameSearchOption.PageNumber" />
+                <div class="w3-container w3-cell w3-left w3-margin-right" style="width:75px">
+                    <p style="margin:0" class="w3-large">@SearchResult?.Paging?.PageCount</p>
+                </div>
+                <button class="w3-button w3-green w3-cell w3-left w3-margin-right" onclick="@(async () => await NavigatePage("right"))">&gt;</button>
+            </div>
+
+            @*<div class="w3-third w3-cell-row">
+            <button class="w3-button w3-green w3-container w3-cell" onclick="@(async () => await NavigatePage("left"))">&lt;</button>
+            <input style="width:45px" class="w3-input w3-tiny w3-container w3-cell w3-margin-left" type="tel" min="1" onkeyup="@OnKeyUp" max="@SearchResult?.Paging?.PageCount" bind="@GameSearchOption.PageNumber" />
+            <p class="w3-container w3-cell"> @SearchResult?.Paging?.PageCount</p>
+            <button class="w3-button w3-green w3-container w3-cell" onclick="@(async () => await NavigatePage("right"))">&gt;</button>
+        </div>*@
+        </div>
+    </div>
+</div>
+}
+
+
+@functions
+{
+[Parameter]
+Func<GameSearchOption, Task> SearchGames { get; set; }
+
+[Parameter]
+PagedResult<Game> SearchResult { get; set; }
+
+[Parameter]
+GameSearchOption GameSearchOption { get; set; }
+
+public void OnKeyUp(UIKeyboardEventArgs uIKeyboardEventArgs)
+{
+    if (uIKeyboardEventArgs.Key == "Enter")
+    {
+        SetValidPageNumber();
+        this.SearchGames(GameSearchOption);
+    }
+}
+
+public async Task NavigatePage(string direction)
+{
+    var pageNo = SearchResult?.Paging.PageNo;
+    if (direction == "left")
+    {
+        if (pageNo > 1)
+        {
+            GameSearchOption.PageNumber -= 1;
+            await this.SearchGames(GameSearchOption);
+        }
+    }
+    else
+    {
+        if (SearchResult.Paging.PageNo < SearchResult.Paging.PageCount)
+        {
+            SearchResult.Paging.PageNo += 1;
+            GameSearchOption.PageNumber = SearchResult.Paging.PageNo;
+            await this.SearchGames(GameSearchOption);
+        }
+
+        //if (pageNo >= SearchResult.Paging.PageCount - 1)
+        //{
+        //    SearchResult.Paging.PageNo = SearchResult.Paging.PageCount - 1;
+        //    GameSearchOption.PageNumber = pageNo;
+        //    await this.SearchGames(GameSearchOption);
+        //}
+    }
+
+}
+
+private void SetValidPageNumber()
+{
+    if (GameSearchOption.PageNumber > SearchResult.Paging.PageCount)
+        GameSearchOption.PageNumber = SearchResult.Paging.PageCount;
+    else if (GameSearchOption.PageNumber < 1)
+    {
+        GameSearchOption.PageNumber = 1;
+    }
+}
+}

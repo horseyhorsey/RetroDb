@@ -1,0 +1,38 @@
+﻿@page "/Systems"
+@inject ApplicationState appState;
+
+@if (appState.Systems == null)
+{
+    <p><em>Loading RetroDb Systems...</em></p>
+}
+else
+{
+    <div class="w3-container" id="retrodb-systems-container">
+        <h1 class="w3-center">Systems</h1>
+        <h3 class="w3-center">System Count: @appState.Systems.Count</h3>
+
+        <ul class="w3-ul w3-centered">
+            @foreach (var system in appState.Systems)
+            {
+                <li class="w3-card w3-half w3-container" id="retrodb-systems-container-item">
+
+                    <a href="/system/@system.Id">
+                        <div class="w3-bar">
+                            <img class="w3-container w3-left" style="height:35px" alt=" "
+                                 src="./RlFiles/Icons/@($"{system.Name}.png")" />
+                            <p class="w3-container w3-right">@system.Name</p>
+                        </div>
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+}
+
+@functions
+{ 
+    protected override void OnInit()
+    {
+        appState.OnStateChanged += StateHasChanged;
+    }
+}

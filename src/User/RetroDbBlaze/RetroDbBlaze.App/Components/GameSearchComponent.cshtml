@@ -1,0 +1,67 @@
+﻿<div id="game-search" class="w3-container">
+
+    <div class="w3-bar">
+        <!-- System Type-->
+        <div class="w3-bar-item w3-hide">
+            <p>System Type</p>
+            <select multiple size="2" name="System Type" class="retrodb-select w3-select" bind="@GameSearchOption.GameSystemType">
+                @foreach (var value in Enum.GetValues(typeof(GameSystemType)))
+                {
+                    <option value="@value">@value.ToString()</option>
+                }
+            </select>
+        </div>
+
+        <!-- Control type-->
+        <div class="w3-bar-item w3-hide">
+            <p>Control Type</p>
+            <select multiple size="2" class="retrodb-select w3-select" bind="@GameSearchOption.GameControlType">
+                @foreach (var value in Enum.GetValues(typeof(GameControlType)))
+                {
+                    <option value="@value">@value.ToString()</option>
+                }
+            </select>
+        </div>
+
+        <div class="w3-container w3-cell">
+            <p>Game Search: </p>
+        </div>
+
+        <!-- Search Text-->
+        <div class="w3-container w3-cell">
+            <input type="text" class="w3-round w3-input retrodb-tinytopmargin"
+                   onkeyup="@OnKeyUp" bind="@GameSearchOption.SearchText" />
+        </div>
+
+        <!-- Submit Search and Set page to 1-->
+        <div class="w3-container w3-cell">
+            <button onclick="@(() => OnRunSearch())" type="button"
+                    class="w3-button w3-green retrodb-tinytopmargin">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+@functions
+{
+[Parameter]
+Func<GameSearchOption, Task> SearchGames { get; set; }
+
+[Parameter]
+GameSearchOption GameSearchOption { get; set; }
+
+public async Task OnRunSearch()
+{
+    GameSearchOption.PageNumber = 1;
+    await SearchGames(GameSearchOption);
+}
+
+public void OnKeyUp(UIKeyboardEventArgs uIKeyboardEventArgs)
+{
+    if (uIKeyboardEventArgs.Key == "Enter")
+    {
+        OnRunSearch();
+    }
+}
+}

@@ -1,0 +1,13 @@
+﻿<div class="@(IsBusy ? "busy" : null)">
+    <div class="w3-container cover"></div>
+    @ChildContent
+</div>
+
+
+@functions{
+    [Parameter]
+    RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    bool IsBusy { get; set; }
+}

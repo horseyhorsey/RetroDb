@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="css/w3/w3.css" rel="stylesheet" />
+    <!--FA-->
+    <link href="css/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="w3-display-container w3-card-4 w3-transparent" 
+         style="width:100px;height:90px">
+        <div class="w3-display-topmiddle">
+            <button class="w3-circle" onclick="@(() => NavigatePause(Commands.RL_PAUSE_UP))">
+                <i class="fas fa-arrow-alt-circle-up"></i>
+            </button>
+        </div>
+        <div class="w3-display-bottommiddle">
+            <button class="w3-circle" onclick="@(() => NavigatePause(Commands.RL_PAUSE_DOWN))">
+                <i class="fas fa-arrow-alt-circle-down"></i>
+            </button>
+        </div>
+
+        <div class="w3-display-middle">
+            <button class="w3-circle w3-green "onclick="@(() => NavigatePause(Commands.RL_PAUSE_SELECT))">
+                <i class="fas fa-arrow-alt-circle-down"></i>
+            </button>
+        </div>
+
+        <div class="w3-display-left">
+            <button class="w3-circle" onclick="@(() => NavigatePause(Commands.RL_PAUSE_LEFT))">
+                <i class="fas fa-arrow-alt-circle-left"></i>
+            </button>
+        </div>
+        <div class="w3-display-right">
+            <button class="w3-circle" onclick="@(() => NavigatePause(Commands.RL_PAUSE_RIGHT))">
+                <i class="fas fa-arrow-alt-circle-right"></i>
+            </button>
+        </div>
+    </div>
+</body>
+</html>

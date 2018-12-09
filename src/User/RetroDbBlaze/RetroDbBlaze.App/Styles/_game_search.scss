@@ -1,0 +1,57 @@
+﻿@import "_variables.scss";
+
+#game-search-container {
+    margin: 0;
+}
+
+#game-search {
+    background: linear-gradient(235deg, $color5 0%, $color5 100%);
+    color: black;
+    font-size: 14px;
+    font-family: 'Bungee', cursive;
+}
+
+#game-search-results {
+    background: $colorbg;
+}
+
+#page-results-container {
+    background: linear-gradient(45deg, $color5 8%, $color3 100%);
+    border-radius: 10px;
+    font-weight: bolder;
+    font-size: 24px;    
+}
+
+#page-results-container p {
+    color: $color3;
+}
+
+#page-control {
+}
+
+#game-search-result-item {
+    /*background: $color4;*/
+    background: linear-gradient(35deg, $color5 8%, $color3 100%);
+    color: #e8fdfe;
+    font-family: 'Anton', sans-serif;
+}
+
+#game-details {
+    width: 100%;
+    float: right;
+}
+
+#game-details p {
+    color: $color2;
+}
+
+#retrodb-systems-container-item 
+{
+    background: linear-gradient(90deg, $color5 0%, $color5 70%, $color4 100%);
+    box-shadow: $color1 2px 2px;
+}
+
+#retrodb-systems-container p {
+    color: $color2;
+    font-size: 16px;    
+}

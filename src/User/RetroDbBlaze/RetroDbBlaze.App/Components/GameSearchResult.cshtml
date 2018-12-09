@@ -1,0 +1,16 @@
+﻿<a href="/game/@Game.Id">
+    <div class="w3-bar w3-large w3-round" id="game-search-result-item">
+        <div class="w3-bar-item"><img src="./RlFiles/Icons/@($"{Game.System.Name}.png")"/></div>
+        <div class="w3-bar-item"><i style="color:gold" class=@(Game.Favourite ? "fas fa-star" : null)></i></div>
+        <div class="w3-bar-item">@Game.ShortDescription</div>
+        <div class="w3-bar-item">@Game.Genre</div>
+        <div class="w3-bar-item w3-right">@Game.Year</div>
+        <div class="w3-bar-item w3-right">@Game.System.Name</div>
+
+    </div>
+</a>
+
+@functions{
+    [Parameter]
+    Game Game { get; set; }
+}

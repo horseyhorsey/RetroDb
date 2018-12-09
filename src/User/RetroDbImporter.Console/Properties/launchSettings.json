@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "RetroDbImporter.Console": {
+      "commandName": "Project",
+      "commandLineArgs": "I:\\hyperspin I:\\rocketlauncher"
+    }
+  }
+}

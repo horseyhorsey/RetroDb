@@ -1,0 +1,62 @@
+﻿@import "_variables.scss";
+
+html {
+    font-family: 'Sigmar One', cursive;
+    height: 100%;
+    background: $colorbg;
+}
+
+body {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: $color2;
+}
+
+p {    
+    font-family: 'Bungee', cursive;
+    color:#1d1d1d;
+}
+
+#retrodb-welcome p 
+{
+    color: $color2;
+}
+
+.busy {
+    position: absolute;
+    width: 100%;
+
+    > .cover {
+        width: 100%;
+        background: rgba(150, 150, 150, 0.5);
+        position: absolute;
+        height: 100%;
+        z-index: 1;
+    }
+}
+
+.retro-header {
+    background: $color5;
+    border: 5px groove yellow;
+    width: 100%;
+}
+
+.retro-header h1 {
+    color: yellow;
+}
+
+.retro-menu-btn {
+    right: 0px;
+}
+
+.retrodb-tinytopmargin {
+    margin-top:12px;
+}
+
+.retrodb-stat-table { }
+.retrodb-stat-table header
+{
+    background: $color5;
+}

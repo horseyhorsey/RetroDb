@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\RetroDb.DataSqlite\RetroDb.DataSqlite.csproj" />
+    <ProjectReference Include="..\..\Data\RetroDb.Data\RetroDb.Data.csproj" />
+    <ProjectReference Include="..\RetroDb.Engine\RetroDb.Engine.csproj" />
+  </ItemGroup>
+
+</Project>

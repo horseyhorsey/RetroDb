@@ -1,0 +1,52 @@
+﻿@inject ApplicationState appState;
+
+<nav id="retrodb-navbar" class="w3-bar w3-border">  
+
+    <!-- HOME -->
+    <NavLink id="retrodb-nav-link" ActiveClass="active" 
+            class="w3-bar-item w3-button w3-third w3-mobile" href="/" Match="NavLinkMatch.All">
+
+        <div class="w3-bar" style="height:32px">
+            <div class="w3-cell">
+                <h5><b>Retro Db</b></h5>
+            </div>
+
+            <div class="w3-cell">
+                <i id="icon-home" class="fa-2x fas fa-home"></i>
+            </div>
+        </div>        
+    </NavLink>
+
+    <!-- SEARCH -->
+    <NavLink id="retrodb-nav-link" ActiveClass="active" class="w3-bar-item w3-button w3-third" href="/Search" Match="NavLinkMatch.All">
+        <i id="icon-search" class="fa-2x fas fa-search"></i>
+    </NavLink>
+
+    <!-- Systems -->
+    <NavLink ActiveClass="active" href="/systems" Match="NavLinkMatch.All"
+             class="w3-bar-item w3-button">
+        <i id="icon-systems" class="fa-2x fas fa-boxes"></i>
+    </NavLink>
+
+    <!-- Favorites -->
+    <NavLink ActiveClass="active" href="/favorites" Match="NavLinkMatch.All"
+             class="w3-bar-item">
+        <i id="icon-faves" class="fa-2x fas fa-star"></i>
+    </NavLink>
+
+    <!-- RocketLauncher Status -->
+    <div class="@(appState.IsRocketLaunchRunning ? "w3-show" : "w3-hide") w3-bar-item w3-right">
+        <NavLink ActiveClass="active" href="/game/running" Match="NavLinkMatch.All"
+                 class="w3-button">
+            <i class="fa-2x fas fa-gamepad"></i>
+        </NavLink>
+    </div>
+</nav> 
+
+@functions
+{
+    protected override void OnInit()
+    {
+        appState.OnStateChanged += StateHasChanged;
+    }
+}

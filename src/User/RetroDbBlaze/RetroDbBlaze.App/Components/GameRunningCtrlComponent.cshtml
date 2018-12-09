@@ -1,0 +1,68 @@
+﻿<div class="w3-row">
+    <div class="w3-container w3-center">
+        <button class="w3-button w3-red"
+                onclick="@(() => PauseGame())">
+            <i class="fa-2x fas fa-pause"></i>
+        </button>
+
+        <button class="w3-button w3-red"
+                onclick="@(() => QuitGame())">
+            <i class="fa-2x fas fa-window-close"></i>
+        </button>
+    </div>
+</div>
+
+<div class="w3-row w3-margin">
+
+    <div class="w3-third">
+        <p></p>
+    </div>
+
+    <div class="w3-display-container w3-third w3-card-4 w3-mobile"
+         style="width:360px;height:150px">
+        <div class="w3-display-topmiddle">
+            <button class="w3-circle" onclick="@(() => NavigatePause(Commands.RL_PAUSE_UP))">
+                <i class="fa-3x fas fa-arrow-alt-circle-up"></i>
+            </button>
+        </div>
+        <div class="w3-display-bottommiddle">
+            <button class="w3-circle" onclick="@(() => NavigatePause(Commands.RL_PAUSE_DOWN))">
+                <i class="fa-3x fas fa-arrow-alt-circle-down"></i>
+            </button>
+        </div>
+
+        <div class="w3-display-middle">
+            <button class="w3-circle w3-green w3-large" onclick="@(() => NavigatePause(Commands.RL_PAUSE_SELECT))">
+                SELECT
+            </button>
+        </div>
+
+        <div class="w3-display-left">
+            <button class="w3-circle" onclick="@(() => NavigatePause(Commands.RL_PAUSE_LEFT))">
+                <i class="fa-3x fas fa-arrow-alt-circle-left"></i>
+            </button>
+        </div>
+        <div class="w3-display-right">
+            <button class="w3-circle" onclick="@(() => NavigatePause(Commands.RL_PAUSE_RIGHT))">
+                <i class="fa-3x fas fa-arrow-alt-circle-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="w3-third">
+        <p></p>
+    </div>
+</div>
+
+
+@functions
+{
+    [Parameter]
+    Func<string, Task> NavigatePause { get; set; }
+
+    [Parameter]
+    Func<Task> PauseGame { get; set; }
+
+    [Parameter]
+    Func<Task> QuitGame { get; set; }
+}

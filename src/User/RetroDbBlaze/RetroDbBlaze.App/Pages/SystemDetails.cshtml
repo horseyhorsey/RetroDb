@@ -1,0 +1,67 @@
+﻿@page "/System/{id:int}"
+@using RetroDb.Data
+@using RetroDb.Data.Model;
+@inject HttpClient Http
+
+@if (GameSystem == null)
+{
+    <p><em>Loading system...</em></p>
+}
+else
+{
+    <SystemInfoComponent GameSystemInfo="@GameSystem" />
+
+    <div class="w3-row w3-margin w3-center">
+        <img class="w3-image"
+             style="width:200px;height:100px"
+             src="/hsFiles/Main Menu/Images/Wheel/@(GameSystem.GameSystem.Name).png" />
+    </div>
+
+    <hr />
+
+    <div class="w3-center">
+        <h1>@GameSystem.GameSystem.Name.ToUpper()</h1>
+        <h3>SYSTEM DETAILS</h3>
+
+        <div class="w3-row w3-margin">
+
+            <video class="w3-image w3-card-2" controls="controls"
+                   style="width:320px;height:240px"
+                   src="/hsFiles/Main Menu/Video/@(GameSystem.GameSystem.Name).mp4" />
+        </div>
+
+    </div>
+
+    @if (GameSystem.LastPlayedGames?.Count > 0)
+    {
+        <hr />
+        <div class="w3-container">
+            <div class="w3-half">
+                <h1 class="w3-center">Last Played</h1>
+                <ul>
+                    @foreach (var game in GameSystem.LastPlayedGames)
+                    {
+                        <GameComponent game="game" />
+                    }
+                </ul>
+            </div>
+        </div>
+    }
+}
+
+@functions{
+
+    [Parameter]
+    int id { get; set; }
+
+    public string imgUrl { get; set; }
+
+    GameSystemInfo GameSystem { get; set; }
+
+    protected override async Task OnInitAsync()
+    {
+        GameSystem = await Http.GetJsonAsync<GameSystemInfo>($"api/systems/{id}/info");
+
+        //GameSystem.Image = $@"/HsFiles/Main Menu/Images/Wheel/{GameSystem.Name}.png";
+    }
+}

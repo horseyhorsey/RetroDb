@@ -1,0 +1,60 @@
+﻿@using RetroDb.Data;
+@inject HttpClient Http
+
+@if (game == null)
+{
+    <p>Game card loading...</p>
+}
+else
+{
+    <div class="w3-container w3-card-4 w3-dark-grey"
+         style="height:240px"
+         >
+
+        <a href="/game/@game.Id" class="w3-container">
+            <div class="w3-block">
+                <img class="w3-image"
+                     style="width:150px"
+                     src="/hsFiles/@(game.System.Name)/Images/Wheel/@(game.FileName).png"
+                     alt="GameImage">
+                <img class="w3-image w3-round w3-right"
+                     style="width:100px"
+                     src="/hsFiles/Main Menu/Images/Wheel/@(game.System.Name).png"
+                     alt="GameImage">
+            </div>
+        </a>
+
+        <div class="w3-container">
+            <h5>@game.ShortDescription</h5>
+            <h6>@game.System.Name</h6>
+        </div>
+
+        <div class="w3-container">
+            <button class="w3-button w3-green"></button>
+            <button class="w3-button w3-red"></button>
+        </div>
+    </div>
+}
+
+
+@*<img class="w3-round w3-image"
+         width="150" height="75"
+         src="/hsFiles/@(game.System.Name)/Images/Wheel/@(game.FileName).png" />
+                        </th>
+    <td>@game.Id</td>
+    <td>@game.FileName</td>
+    <td>@game.ShortDescription</td>
+    <td><a href="systemdetails/@game.SystemId">@game.System.Name</a></td>*@
+
+
+@functions
+{
+[Parameter]
+Game game { get; set; }
+
+public async Task LaunchGame()
+{
+    var url = "api/LaunchGame/" + game.Id;
+    await Http.GetAsync(url);
+}
+}
