@@ -21,7 +21,7 @@ Dotnet runtime 2.1.500 (aka 2.1.6) - [https://dotnet.microsoft.com/download](htt
 
 ## Importing
 
-See [Import ReadMe](src\User\RetroDbImporter.Console)
+See [Import ReadMe](src/User/RetroDbImporter.Console)
 
 ## Web Server / UI
 
